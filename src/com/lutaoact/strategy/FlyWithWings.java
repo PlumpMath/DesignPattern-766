@@ -1,4 +1,4 @@
-package com.lutaoact;
+package com.lutaoact.strategy;
 
 public class FlyWithWings implements FlyBehavior {
 	@Override
