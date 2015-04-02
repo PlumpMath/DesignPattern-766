@@ -1,45 +1,43 @@
 package com.lutaoact.observer;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class WeatherData implements Subject {
-	private ArrayList<Observer> observers;
+
+public class WeatherData extends java.util.Observable {
 	private float temperature;
 	private float humidity;
 	private float pressure;
+	private Map<String, Float> mMap;
 	
 	public WeatherData() {
-		observers = new ArrayList<Observer>();
-	}
-	
-	@Override
-	public void registerObserver(Observer o) {
-		observers.add(o);
-	}
-
-	@Override
-	public void removeObserver(Observer o) {
-		int i = observers.indexOf(o);
-		if (i >= 0) {
-			observers.remove(o);
-		}
-	}
-
-	@Override
-	public void notifyObservers() {
-		for (int i = 0; i < observers.size(); i++) {
-			observers.get(i).update(temperature, humidity, pressure);
-		}
+		mMap = new HashMap<>();
 	}
 
 	public void measurementsChanged() {
-		notifyObservers();
+		setChanged();
+		notifyObservers(mMap);
 	}
 	
 	public void setMesurements(float temperature, float humidity, float pressure) {
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.pressure = pressure;
+		mMap.put("temperature", temperature);
+		mMap.put("humidity", humidity);
+		mMap.put("pressure", pressure);
 		measurementsChanged();
+	}
+
+	public float getTemperature() {
+		return temperature;
+	}
+
+	public float getHumidity() {
+		return humidity;
+	}
+
+	public float getPressure() {
+		return pressure;
 	}
 }

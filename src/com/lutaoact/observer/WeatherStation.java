@@ -8,5 +8,4 @@ public class WeatherStation {
 		weatherData.setMesurements(80, 65, 30.4f);
 		weatherData.setMesurements(70, 55, 30.5f);
 	}
-
 }
